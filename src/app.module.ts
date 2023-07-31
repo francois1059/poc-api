@@ -6,6 +6,7 @@ import * as winston from 'winston';
 import { Environment } from './env.validation';
 import { configClassValidator } from './lib/config-class-validator';
 import { TodosModule } from './todos/todos.module';
+import { HealthModule } from './health/health.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { TodosModule } from './todos/todos.module';
       transports: [new winston.transports.Console()],
     }),
     TodosModule,
+    HealthModule,
   ],
 })
 export class AppModule {}
