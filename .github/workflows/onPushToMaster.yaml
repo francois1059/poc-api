@@ -22,6 +22,13 @@ jobs:
         run: npm run lint
       - name: Running tests
         run: npm run test
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Initialize Git user
+        run: |
+          git config --global user.email "releaseit@flts.eu"
+          git config --global user.name "Release Workflow"
       - name: Run release
         run: npm run release --ci
         env:
