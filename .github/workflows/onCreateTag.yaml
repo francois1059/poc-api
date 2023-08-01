@@ -1,7 +1,7 @@
 name: onCreateTag Actions
 run-name: ${{ github.actor }} is building the repo ${{ github.repository }} 🚀
 on:
-  push:
+  create:
     tags:
       - '[0-9]+.[0-9]+.[0-9]+'
 
