@@ -43,12 +43,16 @@ jobs:
       - name: Update the image tag in values
         run: yq '.image.tag = "{{ .env.VERSION }}"' -i infra/poc-api/values.yaml
       - name: Push changes
-        run: |
-          cd infra
-          git add -A
-          git config --global user.email "releaseit@flts.eu"
-          git config --global user.name "Release Workflow"
-          git commit -am "chore: Bump to version ${{ env.VERSION }}"
-          git push https://francois1059:${{ secrets.INFRA_GH_TOKEN }}@github.com/francois1059/poc-api-infra.git
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          repository: infra
+      # - name: Push changes
+      #   run: |
+      #     cd infra
+      #     git add -A
+      #     git config --global user.email "releaseit@flts.eu"
+      #     git config --global user.name "Release Workflow"
+      #     git commit -am "chore: Bump to version ${{ env.VERSION }}"
+      #     git push https://francois1059:${{ secrets.INFRA_GH_TOKEN }}@github.com/francois1059/poc-api-infra.git
       # - name: This is the end
       #   run: echo "Uncle Ben's"
