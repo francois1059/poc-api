@@ -20,7 +20,7 @@ jobs:
           username: _json_key
           password: ${{ secrets.GAR_JSON_KEY }}
       - name: Get Package version
-        run: echo VERSION=$(cat package.json | jq -r '.version') >> $GITHUB_ENV'
+        run: echo VERSION=$(cat package.json | jq -r '.version') >> $GITHUB_ENV
       - name: Build the Docker image
         run: "echo ${{ env.VERSION }}"
       #   run: docker build . --file Dockerfile --tag ${{ github.repository }}:${{ github.ref_name }}
