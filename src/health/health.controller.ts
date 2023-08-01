@@ -3,9 +3,7 @@ import { HealthCheckService, HealthCheck } from '@nestjs/terminus';
 
 @Controller('health')
 export class HealthController {
-  constructor(
-    private readonly health: HealthCheckService,
-  ) {}
+  constructor(private readonly health: HealthCheckService) {}
 
   @Get()
   @HealthCheck()
@@ -13,8 +11,8 @@ export class HealthController {
     return this.health.check([
       () => ({
         std: {
-          status: 'up'
-        }
+          status: 'up',
+        },
       }),
     ]);
   }

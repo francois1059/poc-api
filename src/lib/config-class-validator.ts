@@ -1,16 +1,17 @@
-import { plainToInstance, ClassConstructor } from "class-transformer";
-import { validateSync } from "class-validator";
+import { plainToInstance, ClassConstructor } from 'class-transformer';
+import { validateSync } from 'class-validator';
 
-export const configClassValidator = (cls: ClassConstructor<object>) => (config: Record<string, unknown>) => {
+export const configClassValidator =
+  (cls: ClassConstructor<object>) => (config: Record<string, unknown>) => {
     const validatedConfig = plainToInstance(cls, config, {
-        enableImplicitConversion: true,
+      enableImplicitConversion: true,
     });
     const errors = validateSync(validatedConfig, {
-        skipMissingProperties: false,
+      skipMissingProperties: false,
     });
 
     if (errors.length > 0) {
-        throw new Error(errors.toString());
+      throw new Error(errors.toString());
     }
     return validatedConfig;
-};
+  };
