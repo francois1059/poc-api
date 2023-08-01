@@ -37,7 +37,12 @@ jobs:
         with:
           repository: francois1059/poc-api-infra
           path: infra-repo
-      - name: List all files of infra dir
-        run: ls infra-repo
+      - name: Update the image tag in values
+        run: yq '.image.tag = "{{ .env.VERSION }}"' -i infra-repo/poc-api/values.yaml
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: main
       # - name: This is the end
       #   run: echo "Uncle Ben's"
