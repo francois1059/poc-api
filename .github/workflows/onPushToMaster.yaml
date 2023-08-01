@@ -22,10 +22,6 @@ jobs:
         run: npm run lint
       - name: Running tests
         run: npm run test
-  release:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
       - name: Initialize Git user
         run: |
           git config --global user.email "releaseit@flts.eu"
