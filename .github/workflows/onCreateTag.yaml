@@ -1,7 +1,7 @@
 name: onCreateTag Actions
 run-name: Build the Docker image ${{ github.ref_name }} 🚀
 on:
-  create:
+  push:
     tags:
       - '*'
 
