@@ -13,20 +13,22 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
+      - name: Get Package version
+        run: echo VERSION=$(cat package.json | jq -r '.version') >> $GITHUB_ENV
+      - name: Get Package name
+        run: echo APP=$(cat package.json | jq -r '.name') >> $GITHUB_ENV
       - name: Login to Google Artifact Registry
         uses: docker/login-action@v2
         with:
           registry: "${{ vars.GAR_LOCATION }}-docker.pkg.dev"
           username: _json_key
           password: ${{ secrets.GAR_JSON_KEY }}
-      - name: Get Package version
-        run: echo VERSION=$(cat package.json | jq -r '.version') >> $GITHUB_ENV
       - name: Build the Docker image
         run: docker build . --file Dockerfile --tag ${{ github.repository }}:${{ env.VERSION }}
       - name: Push to Google Artifact Registry
         uses: docker/build-push-action@v4
         with:
           push: true
-          tags: "${{ vars.GAR_LOCATION }}-docker.pkg.dev/${{ vars.GCP_PROJECT_ID }}/${{ github.repository }}/${{ github.repository }}:${{ env.VERSION }}"
+          tags: "${{ vars.GAR_LOCATION }}-docker.pkg.dev/${{ vars.GCP_PROJECT_ID }}/${{ env.APP }}/${{ env.APP }}:${{ env.VERSION }}"
       - name: This is the end
         run: "echo 'Uncle Ben\\'s'"
