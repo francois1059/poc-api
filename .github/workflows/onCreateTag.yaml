@@ -3,7 +3,7 @@ run-name: Build the Docker image ${{ github.ref_name }} 🚀
 on:
   create:
     tags:
-    - '*'
+      - '*'
 
 env:
   GAR_LOCATION: europe-west-9
