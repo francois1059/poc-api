@@ -1,9 +1,11 @@
 name: onCreateTag Actions
 run-name: Build the Docker image ${{ github.ref_name }} 🚀
 on:
-  push:
-    tags:
-      - '*'
+  workflow_run:
+    workflows:
+      - "onPushToMaster Actions"
+    types:
+      - "completed"
 
 env:
   GAR_LOCATION: europe-west-9

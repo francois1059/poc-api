@@ -9,8 +9,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    # permissions:
-    #   contents: write
+    permissions:
+      contents: write
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
@@ -28,9 +28,7 @@ jobs:
         run: |
           git config --global user.email "releaseit@flts.eu"
           git config --global user.name "Release Workflow"
-      - name: echo token
-        run: echo ${{ secrets.RELEASEIT_GH_TOKEN }}
       - name: Run release
         run: npm run release --ci
         env:
-          GITHUB_TOKEN: ${{ secrets.RELEASEIT_GH_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
