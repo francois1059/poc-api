@@ -16,7 +16,8 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version-file: .nvmrc
-      - run: npm ci
+      - name: Install the dependancies
+        run: npm ci
       - name: Linting the code
         run: npm run lint
       - name: Running tests

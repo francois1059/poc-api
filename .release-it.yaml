@@ -1,0 +1,7 @@
+git:
+    commitMessage: "chore: release v${version}"
+    requireCleanWorkingDir: true
+github:
+    release: true
+# "hooks": {
+# "after:bump": "npx auto-changelog -p",
