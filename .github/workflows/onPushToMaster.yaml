@@ -9,8 +9,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
+    # permissions:
+    #   contents: write
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
@@ -31,4 +31,4 @@ jobs:
       - name: Run release
         run: npm run release --ci
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.RELEASEIT_GH_TOKEN }}
