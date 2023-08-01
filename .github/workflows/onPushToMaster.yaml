@@ -23,6 +23,7 @@ jobs:
       - name: Running tests
         run: npm run test
   release:
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Initialize Git user
