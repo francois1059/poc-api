@@ -48,8 +48,7 @@ jobs:
           git add -A
           git config --global user.email "releaseit@flts.eu"
           git config --global user.name "Release Workflow"
-          git remote set-url origin https://${{ secrets.INFRA_GH_TOKEN }}@github.com/francois1059/poc-api-infra
           git commit -am "chore: Bump to version ${{ env.VERSION }}"
-          git push
+          git push https://${{ secrets.INFRA_GH_TOKEN }}@github.com/francois1059/poc-api-infra
       # - name: This is the end
       #   run: echo "Uncle Ben's"
