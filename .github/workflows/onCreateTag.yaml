@@ -7,9 +7,6 @@ on:
     types:
       - "completed"
 
-env:
-  GAR_LOCATION: europe-west-9
-
 jobs:
   build:
     runs-on: ubuntu-latest
