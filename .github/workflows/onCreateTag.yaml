@@ -32,7 +32,9 @@ jobs:
           password: ${{ secrets.GAR_JSON_KEY }}
 
       - name: Build the Docker image
-        run: docker build . --file main/Dockerfile --tag ${{ github.repository }}:${{ env.VERSION }}
+        run: |
+          cd main
+          docker build . --file Dockerfile --tag ${{ github.repository }}:${{ env.VERSION }}
 
       - name: Push to Google Artifact Registry
         uses: docker/build-push-action@v4
