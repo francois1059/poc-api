@@ -44,7 +44,7 @@ jobs:
       - name: Update the manifest
         run: |
           cd infra
-          yq '.image.tag = "${{ .env.VERSION }}"' -i ${{ env.APP }}/values.yaml
+          yq '.image.tag = "{{ .env.VERSION }}"' -i ${{ env.APP }}/values.yaml
           git config --unset-all http.https://github.com/.extraheader
 
       - name: Push the manifest to infra repository
@@ -58,7 +58,7 @@ jobs:
           user-name: "Release Workflow"
           user-email: "releaseit@flts.eu"
           target-branch: main
-          commit-message: "chore: Bump version to ${{ .env.VERSION }}"
+          commit-message: "chore: Bump version to {{ .env.VERSION }}"
       #   run: |
       #     cd infra
       #     git config --unset-all http.https://github.com/.extraheader
