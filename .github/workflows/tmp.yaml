@@ -27,6 +27,7 @@ jobs:
         run: |
           cd infra
           git config -l
+          git config --unset-all http.https://github.com/.extraheader
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
