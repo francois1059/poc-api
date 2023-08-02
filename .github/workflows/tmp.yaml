@@ -26,7 +26,8 @@ jobs:
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
-          github_token: ${{ secrets.INFRA_GH_TOKEN }}
-          repository: francois1059/poc-api-infra
+          repo: https://${{ secrets.INFRA_GH_TOKEN }}@github.com/francois1059/poc-api-infra.git
+          repository: francois1059/
           directory: infra
           branch: main
+          message: 'Automated commit and push'
