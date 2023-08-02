@@ -28,11 +28,15 @@ jobs:
           cd infra
           git config -l
           git config --unset-all http.https://github.com/.extraheader
+          echo "--------"
           git config -l
-      - name: Push changes
-        uses: ad-m/github-push-action@master
-        with:
-          repository: francois1059/poc-api-infra
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          directory: infra
-          branch: main
+          git add -A
+          git commit -am "chore: bump version"
+          git push --prune https://token:${{ secrets.GITHUB_TOKEN }}@github.com/francois1059/poc-api-infra.git
+      # - name: Push changes
+      #   uses: ad-m/github-push-action@master
+      #   with:
+      #     repository: francois1059/poc-api-infra
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
+      #     directory: infra
+      #     branch: main
