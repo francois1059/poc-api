@@ -37,22 +37,36 @@ jobs:
       - name: Clone the Infra repo
         uses: actions/checkout@v3
         with:
-          repository: francois1059/poc-api-infra
+          repository: ${{ vars.GIT_INFRA_REPOSITORY }}
           path: infra
           ref: main
-      - name: Update the image tag in values
-        run: yq '.image.tag = "{{ .env.VERSION }}"' -i infra/poc-api/values.yaml
-      - name: Push changes
-        uses: stefanzweifel/git-auto-commit-action@v4
+
+      - name: Update the manifest
+        run: |
+          cd infra
+          yq '.image.tag = "${{ .env.VERSION }}"' -i ${{ env.APP }}/values.yaml
+          git config --unset-all http.https://github.com/.extraheader
+
+      - name: Push the manifest to infra repository
+        uses: cpina/github-action-push-to-another-repository@v1.7
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.INFRA_GH_TOKEN }}
         with:
-          repository: infra
-      # - name: Push changes
+          source-directory: infra
+          destination-github-username: token
+          destination-repository-name: ${{ vars.GIT_INFRA_REPOSITORY }}
+          user-name: "Release Workflow"
+          user-email: "releaseit@flts.eu"
+          target-branch: main
+          commit-message: "chore: Bump version to ${{ .env.VERSION }}"
       #   run: |
       #     cd infra
-      #     git add -A
+      #     git config --unset-all http.https://github.com/.extraheader
       #     git config --global user.email "releaseit@flts.eu"
       #     git config --global user.name "Release Workflow"
-      #     git commit -am "chore: Bump to version ${{ env.VERSION }}"
-      #     git push https://francois1059:${{ secrets.INFRA_GH_TOKEN }}@github.com/francois1059/poc-api-infra.git
-      # - name: This is the end
-      #   run: echo "Uncle Ben's"
+      #     git add -A
+      #     git commit -am "chore: Bump version to ${{ .env.VERSION }}"
+      #     git push --prune https://token:${{ secrets.INFRA_GH_TOKEN }}@github.com/${{ vars.GIT_INFRA_REPOSITORY }}.git
+
+      - name: This is the end
+        run: echo "Uncle Ben's"

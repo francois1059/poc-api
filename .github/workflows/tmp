@@ -23,18 +23,7 @@ jobs:
           ref: main
       - name: Update the image tag in values
         run: yq '.image.tag = "blabla"' -i infra/poc-api/values.yaml
-      - name: debug
-        run: |
-          cd infra
-          git config -l
-          git config --unset-all http.https://github.com/.extraheader
-          echo "--------"
-          git config --global user.email "releaseit@flts.eu"
-          git config --global user.name "Release Workflow"
-          git config -l
-          git add -A
-          git commit -am "chore: bump version"
-          git push --prune https://token:${{ secrets.INFRA_GH_TOKEN }}@github.com/francois1059/poc-api-infra.git
+      
       # - name: Push changes
       #   uses: ad-m/github-push-action@master
       #   with:
