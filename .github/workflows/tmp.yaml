@@ -29,6 +29,8 @@ jobs:
           git config -l
           git config --unset-all http.https://github.com/.extraheader
           echo "--------"
+          git config --global user.email "releaseit@flts.eu"
+          git config --global user.name "Release Workflow"
           git config -l
           git add -A
           git commit -am "chore: bump version"
