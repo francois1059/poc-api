@@ -30,6 +30,7 @@ jobs:
         with:
           source-directory: infra
           destination-github-username: francois1059
+          destination-repository-name: poc-app-api-infra
           commit-message: "Bump to version XX"
           user-email: releaseit@flts.eu
           target-branch: main
