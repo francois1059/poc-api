@@ -50,7 +50,7 @@ jobs:
           ref: main
 
       - name: Update the manifest
-        run: yq '.image.tag = "{{ env.VERSION }}"' -i infra/${{ env.APP }}/values.yaml
+        run: yq '.image.tag = "${{ env.VERSION }}"' -i infra/${{ env.APP }}/values.yaml
 
       - name: Push the manifest to infra repository
         run: |
