@@ -1,0 +1,29 @@
+name: onCreateTag Actions
+run-name: Build the Docker image ${{ github.ref_name }} 🚀
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+        with:
+          path: main
+          ref: main
+      - name: Clone the Infra repo
+        uses: actions/checkout@v3
+        with:
+          repository: francois1059/poc-api-infra
+          path: infra
+          ref: main
+      - name: Update the image tag in values
+        run: yq '.image.tag = "blabla"' -i infra/poc-api/values.yaml
+      - name: Push changes
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          repository: infra
