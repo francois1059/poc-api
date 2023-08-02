@@ -23,6 +23,10 @@ jobs:
           ref: main
       - name: Update the image tag in values
         run: yq '.image.tag = "blabla"' -i infra/poc-api/values.yaml
+      - name: debug
+        run: |
+          cd infra
+          git config -l
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
@@ -30,4 +34,3 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           directory: infra
           branch: main
-          message: 'Automated commit and push'
