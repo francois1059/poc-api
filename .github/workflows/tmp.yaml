@@ -24,6 +24,12 @@ jobs:
       - name: Update the image tag in values
         run: yq '.image.tag = "blabla"' -i infra/poc-api/values.yaml
       - name: Push changes
-        uses: stefanzweifel/git-auto-commit-action@v4
+        uses: cpina/github-action-push-to-another-repository@main
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.INFRA_GH_TOKEN }}
         with:
-          repository: infra
+          source-directory: infra
+          destination-github-username: francois1059
+          commit-message: "Bump to version XX"
+          user-email: releaseit@flts.eu
+          target-branch: main
