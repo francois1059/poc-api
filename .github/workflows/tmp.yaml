@@ -26,7 +26,7 @@ jobs:
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
-          repository: francois1059/poc-api-infra.git
+          repository: francois1059/poc-api-infra
           github_token: ${{ secrets.GITHUB_TOKEN }}
           directory: infra
           branch: main
