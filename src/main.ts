@@ -10,7 +10,7 @@ async function bootstrap() {
   const port = config.get('PORT');
 
   await app.listen(port);
-  console.log(`App listening on port ${port} !`);
+  console.log(`App listening on port ${port}!`);
 
   process.on('SIGTERM', () => app.close());
 }
